@@ -15,6 +15,9 @@ public interface  RepoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Repos repos);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insertRepos(List<Repos> repos);
+
     @Query("DELETE FROM repos_table")
     void deleteAll();
 

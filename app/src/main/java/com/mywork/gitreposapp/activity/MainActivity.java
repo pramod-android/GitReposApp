@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         mReposViewModel = ViewModelProviders.of(this).get(ReposViewModel.class);
 
 
-         for(int i=0;i<10;i++){
-             Repos repos=new Repos(i,"nodeid","name","fullname",true,"htmlurl","desc","url");
-
-             mReposViewModel.insert(repos);
-        }
+//         for(int i=0;i<10;i++){
+//             Repos repos=new Repos(i,"nodeid","name","fullname",true,"htmlurl","desc","url");
+//
+//             mReposViewModel.insert(repos);
+//        }
 
 
 
