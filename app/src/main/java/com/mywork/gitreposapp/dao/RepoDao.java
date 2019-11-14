@@ -18,6 +18,10 @@ public interface  RepoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertRepos(List<Repos> repos);
 
+    @Query("SELECT COUNT(*) FROM repos_table")
+    LiveData<Integer> getCount();
+
+
     @Query("DELETE FROM repos_table")
     void deleteAll();
 

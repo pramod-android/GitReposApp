@@ -37,7 +37,9 @@ public class ReposRepository {
         mRepoDao = db.repoDao();
         mAllRepos = mRepoDao.getAllRepos();
     }
-
+    public LiveData<Integer> getCount() {
+        return mRepoDao.getCount();
+    }
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<Repos>> getAllRepos() {
@@ -61,7 +63,11 @@ public class ReposRepository {
 
                 List<Repos> reposList = response.body();
 
-                insertRepos(reposList);
+                if(reposList!=null){
+                    if(reposList.size()>0)
+                        insertRepos(reposList);
+                }
+
             }
 
             @Override

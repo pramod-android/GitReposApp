@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface GitWebServices {
-    @GET("/users/pramod-android/repos")
+    @GET("/users/PhilJay/repos")
     Call<List<Repos>> getRepositories();
 
 

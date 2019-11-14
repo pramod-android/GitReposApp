@@ -1,5 +1,6 @@
 package com.mywork.gitreposapp.adapter;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoViewHolder> {
 
-    class RepoViewHolder extends RecyclerView.ViewHolder {
+    class RepoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView textViewName,textViewFullName,textViewDescription,textViewUrl;
 
         private RepoViewHolder(View itemView) {
@@ -24,18 +25,32 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoVi
             textViewFullName = itemView.findViewById(R.id.textViewFullName);
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
             textViewUrl = itemView.findViewById(R.id.textViewUrl);
+            itemView.setOnClickListener(this);
+
+        }
+        public Repos getmItem(int position){
+            Repos repos=mRepos.get(position);
+            return repos;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mClickListener != null) {
+                mClickListener.onItemClick(v, getmItem(getAdapterPosition()));
+            }
 
         }
     }
 
     private final LayoutInflater mInflater;
     private List<Repos> mRepos; // Cached copy of repos
-
+    ItemClickListener mClickListener;
     public RepoListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
     @Override
     public RepoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.repos_recyclear_item, parent, false);
+
         return new RepoViewHolder(itemView);
     }
 
@@ -67,5 +82,13 @@ public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoVi
             return mRepos.size();
         else return 0;
     }
+    // allows clicks events to be caught
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
 
+    public interface ItemClickListener {
+        void onItemClick(View view, Repos repos);
+
+    }
 }

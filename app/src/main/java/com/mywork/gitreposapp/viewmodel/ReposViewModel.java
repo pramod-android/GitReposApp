@@ -20,7 +20,7 @@ public class ReposViewModel extends AndroidViewModel {
         mRepository = new ReposRepository(application);
         mAllRepos = mRepository.getAllRepos();
     }
-
+    public LiveData<Integer> getCount() { return mRepository.getCount(); }
     public LiveData<List<Repos>> getAllRepos() { return mAllRepos; }
 
     public void insert(Repos repos) {
